@@ -19,10 +19,11 @@ const Login = () => {
         try {
             const reg = await fetcher.post('/user/login', user);
             if (reg?.data?.success) {
-                navigate('/home');
                 localStorage.setItem('token', reg?.data?.jwt?.token)
                 localStorage.setItem('user', reg?.data?.data?.name)
                 localStorage.setItem('logged', true)
+                navigate('/home');
+                window.location.reload()
             }
             setLoading(false)
 
