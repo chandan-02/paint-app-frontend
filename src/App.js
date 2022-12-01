@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+  redirect
+
+} from "react-router-dom";
+
+//pages
+import Login from "./pages/Login";
+import Register from './pages/Register'
+import Home from './pages/Home'
+import Paint from './pages/Paint'
+import FourOFour from './pages/404'
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" >
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="home" element={localStorage.getItem('logged') ? <Home /> : <FourOFour />} />
+      <Route path="paint/:id" element={localStorage.getItem('logged') ? <Paint /> : <FourOFour />} />
+    </Route >
+  )
+);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RouterProvider router={router} />
   );
 }
 
