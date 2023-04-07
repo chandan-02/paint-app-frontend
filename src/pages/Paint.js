@@ -10,7 +10,7 @@ const Paint = () => {
     const navigate = useNavigate();
     let { id } = useParams();
     const [update, setUpdate] = useState(false);
-
+    const [type, setType] = useState('Public');
     const handleRestore = async (id) => {
         try {
             const reg = await fetcher.get(`/paint/single/${id}`,);
@@ -100,7 +100,7 @@ const Paint = () => {
         let paintJson = fabricRef.current.toJSON();
         setLoading(true);
         try {
-            const reg = await fetcher.post('/paint/save', { name: promptData, json: paintJson });
+            const reg = await fetcher.post('/paint/save', { name: promptData, json: paintJson, type: type.toLowerCase() });
             if (reg?.data?.success) {
                 navigate(`/paint/${reg?.data?.data?._id}`);
                 window.location.reload();
@@ -121,7 +121,7 @@ const Paint = () => {
         let paintJson = fabricRef.current.toJSON();
         setLoading(true);
         try {
-            const reg = await fetcher.put(`/paint/update/${id}`, { json: paintJson });
+            const reg = await fetcher.put(`/paint/update/${id}`, { json: paintJson, type: type.toLowerCase() });
             if (reg?.data?.success) {
                 navigate(`/paint/${reg?.data?.data?._id}`);
                 window.location.reload();
@@ -151,6 +151,12 @@ const Paint = () => {
                     <button className="border-1 bg-blue-500 text-white rounded px-5 py-2" onClick={handleUpdate}>
                         {loading ? "Please Wait" : "Update Changes"}</button>
             }
+            <div className="relative w-full lg:max-w-sm">
+                <select value={type} onChange={e => setType(e.target.value)} className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
+                    <option>Public</option>
+                    <option>Private</option>
+                </select>
+            </div>
         </div>
         <div className="flex gap-2">
             {/* tools */}

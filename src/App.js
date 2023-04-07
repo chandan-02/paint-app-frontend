@@ -14,6 +14,7 @@ import Home from './pages/Home'
 import Paint from './pages/Paint'
 import FourOFour from './pages/404'
 import Landing from './pages/Landing'
+import Dashboard from './pages/Dashboard'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="register" element={<Register />} />
       <Route path="home" element={localStorage.getItem('logged') ? <Home /> : <FourOFour />} />
       <Route path="paint/:id" element={localStorage.getItem('logged') ? <Paint /> : <FourOFour />} />
+      <Route path="dashboard" element={localStorage.getItem('logged') ? <Dashboard /> : <FourOFour />} />
     </Route >
   )
 );

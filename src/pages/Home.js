@@ -50,11 +50,14 @@ const Home = () => {
         <h1 className="text-2xl m-5">Welcome, {localStorage.getItem('user')}</h1>
         <div className="flex gap-2 items-center">
             <button className="border-1 bg-blue-500 text-white px-5 py-2 rounded w-56" onClick={() => navigate('/paint/new')}>New Drawing</button>
+            <button className="border-1 bg-blue-500 text-white px-5 py-2 rounded w-56" onClick={() => navigate('/dashboard')}>Goto Dashboard</button>
+
             <button className="border-1 bg-red-500 text-white px-5 py-2 rounded w-56" onClick={() => {
                 localStorage.removeItem('logged');
                 localStorage.removeItem('token');
                 navigate('/login', { replace: true });
             }}>Logout </button>
+
         </div>
         {loading ?
             <h1>Loading...</h1> :
