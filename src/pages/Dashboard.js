@@ -38,6 +38,7 @@ const Dashboard = () => {
     const handleLike = async (id) => {
         try {
             const reg = await fetcher.put(`/paint/like/${id}`);
+            window.location.reload();
             if (reg?.data?.success) {
                 // setPaintData(reg?.data?.data)
             }
